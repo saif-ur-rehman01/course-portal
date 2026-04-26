@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Professor Dashboard</title>
+    <link rel="stylesheet" href="./css/professor-dash.css">
+</head>
+<body>
+    <div class="header">
+        <h2 id="professor-name"></h2>
+        <button id="logout-btn">Logout</button>
+    </div>
+
+    <div class="tab-container">
+        <div class="tab" data-tab="catalog">Course Catalog</div>
+        <div class="tab" data-tab="students">Students</div>
+        <div class="tab" data-tab="upload-grades">Upload Grades</div>
+        <div class="tab" data-tab="timetable">Time Table</div>
+    </div>
+
+    <div class="tab-content">
+        <!-- Course Catalog Tab -->
+        <div id="catalog" class="tab-pane">
+            <table id="catalog-table">
+                <thead>
+                    <tr>
+                        <th>Code</th>
+                        <th>Title</th>
+                        <th>Credits</th>
+                        <th>Department</th>
+                        <th>Semester</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+        <!-- Students Tab -->
+        <div id="students" class="tab-pane">
+            <table id="students-table">
+                <thead>
+                    <tr>
+                        <th>Student ID</th>
+                        <th>Name</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Course</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+        <!-- Upload Grades Tab -->
+        <div id="upload-grades" class="tab-pane">
+            <form id="upload-grade-form">
+                <input type="text" id="grade-student-username" required placeholder="Student Username">
+                <input type="text" id="grade-course-code" required placeholder="Code CS-101">
+                <input type="text" id="grade-value" required placeholder="A/B/C/D/F" maxlength="2">
+                <button type="submit">Upload Grade</button>
+            </form>
+            <div id="upload-grade-msg"></div>
+        </div>
+
+        <!-- Time Table Tab -->
+        <div id="timetable" class="tab-pane">
+            <table id="timetable-table">
+                <thead>
+                    <tr>
+                        <th>Course</th>
+                        <th>Day</th>
+                        <th>Start</th>
+                        <th>End</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="./js/professor-dash.js"></script>
+</body>
+</html>

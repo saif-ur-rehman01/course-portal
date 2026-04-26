@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course-Registration</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+    </style>
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body class="body">
+    <div class="container">
+        <div class="header">
+            <div class="heading">
+                <h3>COURSE REGISTRATION PORTAL</h3>
+            </div>
+        </div>
+        <div class="main">
+            <div class="tab-buttons">
+                <div class="tab active" onclick="showForm('student')">Student</div>
+                <div class="tab" onclick="showForm('professor')">Professor</div>
+            </div>
+
+            <div class="form-container">
+                <form method="post" action="http://localhost:8080/course-portal/login" id="student-form" class="form active-form">
+                    <h2>Student Registration</h2>
+                    <input type="text" name="stu_name" placeholder="Username" required>
+                    <input type="password" name="stu_password" placeholder="password" required>
+                    <button class="submit-button" type="submit">Login</button>
+                </form>
+
+                <form method="post" action="http://localhost:8080/course-portal/login" id="professor-form" class="form">
+                    <h2>Professor Registration</h2>
+                    <input type="text" name="prof_name" placeholder="Username" required>
+                    <input type="password" name="prof_password" placeholder="password" required>
+                    <button class="submit-button" type="submit">Login</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="js/index.js"></script>
+</body>
+</html>
+

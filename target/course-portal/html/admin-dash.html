@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin User Management</title>
+  <link rel="stylesheet" href="../css/admin-dash.css"/>
+</head>
+<body>
+  <div class="header">
+    <span>Course Registration Portal - Admin Dashboard</span>
+  </div>
+
+  <div class="container">
+    <div class="tabs">
+      <button class="tab-button active" data-tab="add">Add User</button>
+      <button class="tab-button" data-tab="delete">Delete User</button>
+      <button class="tab-button" data-tab="view">View Users</button>
+      <button class="tab-button" data-tab="add-course">Add Course</button>
+      <button class="tab-button" data-tab="delete-course">Delete Course</button>
+      <button class="tab-button" data-tab="view-courses">View Courses</button>
+      <button class="tab-button" data-tab="remove-grades">Remove Grades</button>
+    </div>
+
+    <div id="add" class="tab-content active no-output-form">
+      <h3>Add User</h3>
+      <form method="post" action="http://localhost:8080/course-portal/add-users" id="add-user-form">
+        <input type="text" name="username" placeholder="Username" required />
+        <input type="password" name="password" placeholder="Password" required />
+        <select name="role" required>
+          <option value="">Select Role</option>
+          <option value="student">Student</option>
+          <option value="professor">Professor</option>
+        </select>
+        <input type="text" name="full_name" placeholder="Full Name" />
+        <input type="email" name="email" placeholder="Email" />
+        <button type="submit" class="submit-btn">Add User</button>
+      </form>
+    </div>
+
+    <div id="delete" class="tab-content no-output-form">
+      <h3>Delete User</h3>
+      <form method="post" action="http://localhost:8080/course-portal/delete-users" id="delete-user-form">
+        <input type="text" name="username" placeholder="Username to delete" required />
+        <button type="submit" class="submit-btn">Delete</button>
+      </form>
+    </div>
+
+    <div id="view" class="tab-content">
+      <h3>View Users</h3>
+      <form id="view-user-form" method="post" action="http://localhost:8080/course-portal/view-users">
+        <select name="role" id="role-select">
+          <option value="">Select Role</option>
+          <option value="student">Student</option>
+          <option value="professor">Professor</option>
+        </select>
+        <input type="text" name="username" id="user-id-input" placeholder="Username"/>
+        <button type="submit" class="submit-btn">Load Users</button>
+      </form>
+      <table id="users-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Role</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <div id="add-course" class="tab-content no-output-form">
+      <h3>Add Course</h3>
+      <form id="add-course-form" method="post" action="http://localhost:8080/course-portal/add-course">
+        <input type="text" name="code" placeholder="Course Code" required />
+        <input type="text" name="title" placeholder="Course Title" required />
+        <input type="number" name="credits" placeholder="Credits" required min="1" />
+        <input type="number" name="dept_id" placeholder="Department ID" required />
+        <input type="number" name="professor_id" placeholder="Professor ID (optional)" />
+        <button type="submit" class="submit-btn">Add Course</button>
+      </form>
+    </div>
+
+    <div id="delete-course" class="tab-content no-output-form" >
+      <h3>Delete Course</h3>
+      <form id="delete-course-form" method="post" action="http://localhost:8080/course-portal/delete-course">
+        <input type="text" name="code" placeholder="Course Code to delete" required />
+        <button type="submit" class="submit-btn">Delete Course</button>
+      </form>
+    </div>
+
+    <div id="view-courses" class="tab-content">
+      <h3>View Courses</h3>
+      <form id="view-courses-form" method="post" action="http://localhost:8080/course-portal/view-courses">
+        <input type="text" name="code" placeholder="Course Code (optional)" />
+        <input type="number" name="dept_id" placeholder="Department ID (optional)" />
+        <button type="submit" class="submit-btn">Load Courses</button>
+      </form>
+      <table id="courses-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Code</th>
+            <th>Title</th>
+            <th>Credits</th>
+            <th>Department</th>
+            <th>Professor ID</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <div id="remove-grades" class="tab-content no-output-form">
+      <h3>Remove Grade</h3>
+      <form id="remove-grade-form" method="post" action="http://localhost:8080/course-portal/remove-grade">
+        <input type="text" name="username" placeholder="Student Username" required />
+        <input type="text" name="code" placeholder="Course Code" required />
+        <button type="submit" class="submit-btn">Remove Grade</button>
+      </form>
+      <div id="remove-grade-msg"></div>
+    </div>
+  </div>
+
+  <script src="../js/admin-dash.js"></script>
+  <script src="../js/admin-courses.js"></script>
+</body>
+</html>

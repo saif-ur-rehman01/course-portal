@@ -1,0 +1,67 @@
+CREATE TABLE users (
+    user_id SERIAL PRIMARY KEY,
+    username TEXT UNIQUE NOT NULL,
+    password TEXT NOT NULL,
+    role TEXT NOT NULL CHECK (role IN ('student', 'professor')),
+    full_name TEXT,
+    email TEXT UNIQUE,
+    semester INT
+);
+CREATE TABLE departments (
+    dept_id SERIAL PRIMARY KEY,
+    name TEXT UNIQUE NOT NULL
+);
+CREATE TABLE courses (
+    course_id SERIAL PRIMARY KEY,
+    code TEXT UNIQUE NOT NULL,           -- e.g., CS101
+    title TEXT NOT NULL,
+    credits INTEGER NOT NULL CHECK (credits > 0),
+    dept_id INT NOT NULL,
+    professor_id INT,
+    semester_num INT,
+    FOREIGN KEY (dept_id) REFERENCES departments(dept_id) ON DELETE CASCADE,
+    FOREIGN KEY (professor_id) REFERENCES users(user_id) ON DELETE SET NULL
+);
+CREATE TABLE prerequisites (
+    course_id INT NOT NULL,
+    prerequisite_id INT NOT NULL,
+    PRIMARY KEY (course_id, prerequisite_id),
+    FOREIGN KEY (course_id) REFERENCES courses(course_id) ON DELETE CASCADE,
+    FOREIGN KEY (prerequisite_id) REFERENCES courses(course_id) ON DELETE CASCADE
+);
+CREATE TABLE course_schedule (
+    schedule_id SERIAL PRIMARY KEY,
+    course_id INT NOT NULL,
+    day VARCHAR(10) NOT NULL,         -- e.g., 'Monday'
+    start_time TIME NOT NULL,
+    end_time TIME NOT NULL,
+    FOREIGN KEY (course_id) REFERENCES courses(course_id) ON DELETE CASCADE
+);
+CREATE TABLE registrations (
+    reg_id SERIAL PRIMARY KEY,
+    student_id INT NOT NULL,
+    course_id INT NOT NULL,
+    status TEXT NOT NULL DEFAULT 'registered'
+           CHECK (status IN ('registered', 'waitlisted')),
+    registration_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    grade VARCHAR(1),
+    FOREIGN KEY (student_id) REFERENCES users(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (course_id) REFERENCES courses(course_id) ON DELETE CASCADE,
+    UNIQUE(student_id, course_id)
+);
+
+//indexing
+CREATE INDEX idx_course_schedule_course ON course_schedule(course_id);
+CREATE INDEX idx_registrations_status ON registrations(status);
+CREATE INDEX idx_users_role ON users(role);
+
+// conflict detection example 
+SELECT * FROM registrations r1
+JOIN course_schedule cs1 ON r1.course_id = cs1.course_id
+WHERE r1.student_id = :student_id AND EXISTS (
+    SELECT 1 FROM course_schedule cs2
+    WHERE cs2.course_id = :new_course_id
+      AND cs1.day = cs2.day
+      AND cs1.start_time < cs2.end_time
+      AND cs2.start_time < cs1.end_time
+);

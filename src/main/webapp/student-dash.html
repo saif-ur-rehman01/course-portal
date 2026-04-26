@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Course Portal</title>
+    <link rel="stylesheet" href="./css/student-dash.css">
+</head>
+<body>
+    <div class="header">
+        <h2 id="student-name"></h2>
+         <button id="logout-btn" style="margin-right: 20px;">Logout</button>
+    </div>
+
+    <div class="tab-container">
+        <div class="tab" data-tab="catalog">Course Catalog</div>
+        <div class="tab" data-tab="enrolled">Enrolled Courses</div>
+        <div class="tab" data-tab="results">Result Card</div>
+        <div class="tab" data-tab="register">Register Course</div>
+        <div class="tab" data-tab="drop">Drop Course</div>
+    </div>
+
+    <div class="tab-content">
+      
+        <div id="catalog" class="tab-pane">
+            <div class="catalog-filters">
+                <label>Department:
+                    <select id="filter-department">
+                        <option value="">All</option>
+                        <option value="2">Computer Science</option>
+                        <option value="3">Math</option>
+                        <option value="4">Chemistry</option>
+                        <option value="5">Physics</option>
+                        <option value="6">Biology</option>
+                    </select>
+                </label>
+                <label>Credits:
+                    <select id="filter-credits">
+                        <option value="">All</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+                </label>
+                <label>Professor:
+                    <input type="text" id="filter-professor" placeholder="Professor Name">
+                </label>
+                <button id="catalog-search-btn">Search</button>
+            </div>
+            <table id="catalog-table">
+                <thead>
+                    <tr>
+                        <th>Code</th>
+                        <th>Title</th>
+                        <th>Credits</th>
+                        <th>Department</th>
+                        <th>Semester</th>
+                        <th>Professor</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+        
+        <div id="enrolled" class="tab-pane">
+            <table id="enrolled-table">
+                <thead>
+                    <tr>
+                        <th>Code</th>
+                        <th>Title</th>
+                        <th>Credits</th>
+                        <th>Department</th>
+                        <th>Professor</th>
+                        <th>Day</th>
+                        <th>Start</th>
+                        <th>End</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+        
+        <div id="results" class="tab-pane">
+            <table id="results-table">
+                <thead>
+                    <tr>
+                        <th>Code</th>
+                        <th>Title</th>
+                        <th>Credits</th>
+                        <th>Department</th>
+                        <th>Professor</th>
+                        <th>Grade</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+        <div id="register" class="tab-pane">
+            <form id="register-form">
+                <input type="text" id="register-course-code" required placeholder="Course Code">
+                <button type="submit">Register Course</button>
+            </form>
+            <div id="register-message"></div>
+        </div>
+
+       
+        <div id="drop" class="tab-pane">
+            <table id="drop-table">
+                <thead>
+                    <tr>
+                        <th>Code</th>
+                        <th>Title</th>
+                        <th>Credits</th>
+                        <th>Department</th>
+                        <th>Professor</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+            <div id="drop-message"></div>
+        </div>
+    </div>
+
+    <script src="./js/student-dash.js"></script>
+</body>
+</html>

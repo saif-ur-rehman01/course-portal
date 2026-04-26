@@ -1,0 +1,6 @@
+com/courseportal/AdminServlet.class
+com/courseportal/StudentDashServlet.class
+com/courseportal/LogoutServlet.class
+com/courseportal/ProfessorDashServlet.class
+com/courseportal/LoginServlet.class
+com/courseportal/AdminDashServlet.class
